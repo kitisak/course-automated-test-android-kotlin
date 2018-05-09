@@ -5,6 +5,7 @@ import android.content.Context
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.ViewInteraction
 import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions
 import android.support.test.espresso.matcher.RootMatchers
 import android.support.test.espresso.matcher.ViewMatchers
@@ -25,11 +26,11 @@ class LoginRobot(val activity: Activity){
 
     private fun fillEditText(resId: Int, text: String): ViewInteraction =
             onView(withId(resId))
-                    .perform(ViewActions.replaceText(text),
-                             ViewActions.closeSoftKeyboard())
+                    .perform(replaceText(text),
+                             closeSoftKeyboard())
 
     private fun clickButton(resId: Int): ViewInteraction =
-            onView((withId(resId))).perform(ViewActions.click())
+            onView((withId(resId))).perform(click())
 
     private fun matchText(viewInteraction: ViewInteraction, text: String): ViewInteraction = viewInteraction
             .check(ViewAssertions.matches(ViewMatchers.withText(text)))

@@ -39,22 +39,28 @@ class MainActivityTest {
 
     }
 
-    private lateinit var robot: LoginRobot
+    private lateinit var loginPage: LoginRobot
+    private lateinit var welcomePage: LoginRobot
     private lateinit var screen: TestLoginScreen
 
     @Before
     fun setup() {
-        robot = LoginRobot(rule.activity)
+        loginPage = LoginRobot(rule.activity)
+        welcomePage = LoginRobot(rule.activity)
         screen = TestLoginScreen()
     }
 
     @Test @Ignore
     fun success_with_robot() {
-        robot
+        loginPage
                 .setEmail("somkiat@xxx.com")
                 .setPassword("")
                 .clickLogin()
                 .mustShow("Success")
+
+        welcomePage
+                .setEmail("somkiat@xxx.com")
+                .setPassword("")
     }
 
     @Test @Ignore
@@ -62,6 +68,7 @@ class MainActivityTest {
         screen {
             email {
                 replaceText("somkiat@xxx.com")
+                closeSoftKeyboard()
             }
             password {
                 replaceText("")
