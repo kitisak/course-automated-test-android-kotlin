@@ -49,6 +49,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    androidTestImplementation 'com.agoda.kakao:kakao:1.3.0'
+    androidTestImplementation 'tools.fastlane:screengrab:1.0.0'
 }
 
 apply plugin: 'jacoco'
