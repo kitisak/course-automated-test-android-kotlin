@@ -9,20 +9,26 @@ import android.support.test.rule.ActivityTestRule
 import demo.loginapplication.screen.TestLoginScreen
 import org.hamcrest.Matchers.not
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
+import tools.fastlane.screengrab.Screengrab
+import tools.fastlane.screengrab.locale.LocaleTestRule
 
 
-class MainActivityTest {
+class MainActivityUITest {
 
     @get:Rule
     val rule: ActivityTestRule<MainActivity>
             = ActivityTestRule(MainActivity::class.java)
 
+    @get:Rule
+    val local: LocaleTestRule = LocaleTestRule();
 
-    @Test @Ignore
+
+    @Test
     fun success() {
+        Screengrab.screenshot("step01");
+
         onView(withId(R.id.email)).perform(
                 replaceText("somkiat@xxx.com"),
                 closeSoftKeyboard())
@@ -31,45 +37,12 @@ class MainActivityTest {
                 replaceText(""),
                 closeSoftKeyboard())
 
+        Screengrab.screenshot("step02");
+
         onView(withId(R.id.email_sign_in_button)).perform(click())
 
-        onView(withText("Success"))
-                .inRoot(withDecorView(not(rule.activity.window.decorView)))
-                .check(matches(isDisplayed()))
+        Screengrab.screenshot("step03");
 
-    }
-
-    private lateinit var robot: LoginRobot
-    private lateinit var screen: TestLoginScreen
-
-    @Before
-    fun setup() {
-        robot = LoginRobot(rule.activity)
-        screen = TestLoginScreen()
-    }
-
-    @Test @Ignore
-    fun success_with_robot() {
-        robot
-                .setEmail("somkiat@xxx.com")
-                .setPassword("")
-                .clickLogin()
-                .mustShow("Success")
-    }
-
-    @Test @Ignore
-    fun success_with_kakao() {
-        screen {
-            email {
-                replaceText("somkiat@xxx.com")
-            }
-            password {
-                replaceText("")
-            }
-            login {
-                click()
-            }
-        }
         onView(withText("Success"))
                 .inRoot(withDecorView(not(rule.activity.window.decorView)))
                 .check(matches(isDisplayed()))
